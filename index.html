@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade de Fisioterapia - Kauane Vitória</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #fdf2f8; /* Fundo rosa bem claro, relaxante */
+            color: #1e293b;
+            padding: 40px 20px;
+        }
+        /* Caixa com os dados da estudante, professor e colégio */
+        .identificacao {
+            background-color: #fce7f3;
+            border: 2px dashed #db2777;
+            border-radius: 12px;
+            padding: 15px;
+            max-width: 550px;
+            margin: 0 auto 30px auto;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #831843;
+        }
+        .identificacao p {
+            margin: 5px 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(219, 39, 119, 0.1);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #db2777; /* Rosa escuro/pink */
+            transition: color 0.5s;
+        }
+        .mensagem {
+            font-size: 1.2rem;
+            margin: 20px auto;
+            min-height: 80px;
+            line-height: 1.6;
+            color: #475569;
+            transition: opacity 0.3s;
+        }
+        .botao {
+            background-color: #db2777;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-radius: 30px; 
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(219, 39, 119, 0.4);
+        }
+        /* Interação ao passar o mouse */
+        .botao:hover {
+            background-color: #be185d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(219, 39, 119, 0.6);
+        }
+        /* Interação ao clicar */
+        .botao:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bloco de Identificação Escolar -->
+    <div class="identificacao">
+        <p><strong>Estudante:</strong> Kauane Vitória da Silva</p>
+        <p><strong>Professor:</strong> Luiz Alessandro</p>
+        <p><strong>Instituição:</strong> Colégio Estadual Dom Pedro II</p>
+    </div>
+
+    <!-- Bloco Interativo da Atividade -->
+    <div class="container">
+        <h1>Fisioterapia e Saúde</h1>
+        <p class="mensagem">Cuidar da postura é um ato de amor próprio! Clique no botão para receber uma dica de bem-estar.</p>
+        <button class="botao">Receber Nova Dica 🔄</button>
+    </div>
+
+    <script>
+        const botao = document.querySelector(".botao");
+        const mensagem = document.querySelector(".mensagem");
+        const titulo = document.querySelector("h1");
+
+        // Lista de dicas de Fisioterapia
+        const dicas = [
+            "Alinhe suas costas na cadeira, relaxe os ombros e faça 3 respirações profundas.",
+            "A cada 1 hora estudando ou no celular, levante-se e estique as pernas por 2 minutos.",
+            "Mantenha as telas dos aparelhos sempre alinhadas à altura dos seus olhos.",
+            "Entrelace os dedos e estique os braços para a frente e para cima para aliviar a tensão.",
+            "Evite sentar sobre uma das pernas para não desalinhá-la e forçar a sua coluna lombar."
+        ];
+
+        let indiceAtual = 0;
+
+        function atualizarDica() {
+            // Efeito visual de carregamento para o botão interativo
+            botao.disabled = true;
+            botao.textContent = "Buscando conselho... ⏳";
+            mensagem.style.opacity = "0.3";
+
+            // Aguarda 600 milissegundos para trocar a mensagem (simula processamento)
+            setTimeout(() => {
+                mensagem.textContent = dicas[indiceAtual];
+                mensagem.style.opacity = "1";
+
+                // Avança na lista de dicas de forma circular
+                indiceAtual = (indiceAtual + 1) % dicas.length;
+
+                // Restaura o botão original
+                botao.disabled = false;
+                botao.textContent = "Ver Próxima Dica 🔄";
+                
+                // Alterna dinamicamente entre diferentes variações de tons rosa/roxo para o título
+                const tonsRosa = ["#db2777", "#be185d", "#9d174d", "#ec4899"];
+                titulo.style.color = tonsRosa[Math.floor(Math.random() * tonsRosa.length)];
+            }, 600);
+        }
+
+        botao.addEventListener("click", atualizarDica);
+    </script>
+
+</body>
+</html>
